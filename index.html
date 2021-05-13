@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kees Sommer</title>
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');            :root {
+                --baseBlockSize: 100px;
+                --baseBorderWidth: calc(var(--baseBlockSize) / 10);
+                --baseMargin: calc((var(--baseBlockSize) + var(--baseBorderWidth) * 2) / -2);
+                --hoverScale: 1.05;
+                --expandScale: 6;
+                --backgroundColor: #7D888E;
+                --circleBorderColor: #a6afb4;
+                --circleBackgroundColor: var(--circleBorderColor);
+                --textColor: #E8EAE1;
+                --overlayColor: #3B4549;
+                --overlayOpacity: 0.9;
+                /* --mainLogoBackgroundColor: #666f74; */
+                --mainLogoBackgroundColor: var(--backgroundColor);
+                --mouseDownScale: 0.95;
+                --longTransitionTime: 2s;
+                --mediumTansitionTime: 1s;
+                --fastTransitionTime: 0.3s;
+
+            }
+
+            html, body {
+                height: 100%;
+                font-family: 'Montserrat', sans-serif;
+            }
+            
+            body {
+                margin: 0;
+                background-color: var(--backgroundColor);
+            }
+
+            h1 {
+                font-size: 22pt;
+                color: var(--textColor);
+                line-height: 10pt;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 14pt;
+                color: var(--textColor);
+                line-height: 4pt;
+                text-align: center;
+            }
+
+            h2.subBlockHeading {
+                position: absolute;
+                transition: var(--mediumTansitionTime);
+                opacity: 0;
+                left: 50%;
+                transform: translate(-50%, calc(var(--baseBlockSize) * 0.9));
+                z-index: -1;
+            }
+
+            h2.subBlockHeading.visibleHeading {
+                opacity: 1;
+            }
+
+            h3 {
+                text-align: center;
+                position: absolute;
+                transform: translateY(calc(var(--baseBlockSize) * -0.235));
+                font-size: 7pt;
+                color: var(--overlayColor);
+                opacity: 0;
+                transition: var(--longTransitionTime);
+            }
+
+            p {
+                position: absolute;
+                font-size: 2pt;
+                color: var(--textColor);
+                max-width: calc(var(--baseBlockSize) * 0.9);
+                text-align: center;
+                opacity: 0;
+            }
+
+            iframe {
+                position: absolute; 
+                transform: translateY(calc(var(--baseBlockSize) * 0.33));
+                visibility: hidden;
+                opacity: 0;
+                transition: var(--longTransitionTime);
+            }
+
+            iframe.visibleFrame {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .mainInfo {
+                text-align: center;
+                position: absolute;
+                top: calc(50% + var(--baseBlockSize) * 1.1);
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .overlay {
+                background-color: var(--overlayColor);
+                opacity: 0;
+                position: absolute; 
+                width: var(--baseBlockSize); 
+                height: calc(var(--baseBlockSize) * 0.7);
+                transform: translateY(calc(var(--baseBlockSize) * 0.18));
+                transition: var(--mediumTansitionTime);
+            }
+
+            .semiOpaque {
+                opacity: var(--overlayOpacity);
+            }
+
+            .fullyOpaque {
+                opacity: 1;
+            }
+
+            .container {
+                height: 100%;
+                position: relative;
+                z-index: 0;
+            }
+
+            .visual {
+                transition: var(--longTransitionTime);
+                margin: var(--baseMargin) 0 0 var(--baseMargin);
+                width: var(--baseBlockSize);
+                height: var(--baseBlockSize);
+                background:var(--circleBackgroundColor);
+                border-radius: 50%;
+                border-width: var(--baseBorderWidth);
+                border-color: var(--circleBorderColor);
+                border-style: solid;
+                overflow: hidden;
+                background-size: calc(var(--baseBlockSize) * 0.75);
+                background-position: center;
+                background-repeat: no-repeat;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .visual.hoverable:hover:not(.visual.expanded) {
+                transform: scale(var(--hoverScale));
+                transition: var(--fastTransitionTime);
+            }
+
+            .visual.hoverable:active:not(.visual.expanded) {
+                transform: scale(var(--mouseDownScale));
+                transition: var(--fastTransitionTime);
+            }
+
+            .visual.expanded {
+                z-index: 2;
+                transform: scale(var(--expandScale)) translateY(4vh);
+            }
+
+            .block {
+                transition: transform var(--mediumTansitionTime) ease-in-out;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                user-select: none;
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -o-user-select: none;
+                z-index: 0;
+            }
+
+            .block.main {
+                z-index: 1;
+                background-color: var(--mainLogoBackgroundColor);
+                border-color: var(--circleBorderColor);
+            }
+
+            .block.sub1Down {
+                transform: translate(-20vw, calc(23vh - 5vw));
+            }
+
+            .block.sub1Left {
+                transform: translateX(3vw) translateY(-28vh);
+            }
+
+            .block.sub1Right {
+                transform: translateX(20vw) translateY(calc(37vh - 5vw));
+            }
+
+            .block.sub1DownMain {
+                transform: scale(1.35);
+                transition: var(--mediumTansitionTime);
+            }
+
+            .block.sub1LeftMain {
+                transform: scale(1.18);
+                transition: var(--mediumTansitionTime);
+            }
+
+            .block.sub2DownDown {
+                transform: translateX(-22vw) translateY(calc(20vh - 10vw));
+            }
+
+            .block.sub2DownLeft {
+                transform: translateX(-10vw) translateY(calc(-12vh - 10vw));
+            }
+
+            .block.sub2DownRight {
+                transform: translateX(10vw) translateY(calc(40vh - 30vw));
+            }
+
+            .logo {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="block sub1" id="sub1Down">
+                <div class="block visual sub2" id="sub2DownDown"></div>
+                <div class="block sub2 visual" id="sub2DownLeft"></div>
+                <div class="block sub2 visual" id="sub2DownRight"></div>
+
+                <div class="block sub1" id="sub1DownMain">
+                    <div class="block visual" 
+                    id="sub1DownVisual" 
+                    onclick="clickSub1Block()"></div>
+                </div>
+                <h2 class="subBlockHeading">available</h2>
+            </div>
+
+            <div class="block sub1" id="sub1Left">
+                <div class="block sub1" id="sub1LeftMain">
+                    <div class="block visual" 
+                    id="sub1LeftVisual"
+                    onclick="clickPopOutBlock(event)">
+                        <img src="images/byConstellation.jpg" style="height: 110px">
+                        <h3>by constellation</h3>
+                        <div class="overlay"></div>
+                        <p>
+                        Lorem ipsum dolor sit amet, 
+                            consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt 
+                            ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud 
+                            exercitation ullamco laboris nisi ut 
+                            aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit 
+                            in voluptate velit esse cillum 
+                            dolore eu fugiat nulla pariatur. 
+                            Excepteur sint occaecat cupidatat 
+                            non proident, sunt in culpa qui 
+                            officia deserunt mollit anim id 
+                            est laborum.
+                        </p>
+                        <iframe width="50" height="30" 
+                        src="https://www.youtube.com/embed/1FOU2Ajxvok" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="autoplay; modestbranding" 
+                        allowfullscreen></iframe>                   
+                    </div>
+                </div>
+                <h2 class="subBlockHeading">upcoming</h2>
+            </div>
+
+            <div class="block sub1 visual" id="sub1Right"></div>
+
+            <div class="block visual main" 
+            id="mainBlock"
+            onclick="clickMainBlock()">
+                <img src="images/logo.svg" style="width: calc(var(--baseBlockSize) * 0.9)">
+            </div>
+            <div class="mainInfo" onclick="clickMainBlock()">
+                <br><br>
+                <h1>Kees Sommer</h1>
+                <h2>full stack & game dev</h2>
+                <br>
+                <a class="logo" href="https://www.instagram.com/keessommer/" target="_blank"><img src="images/ig-logo-black.svg"></a>
+                <a class="logo" href="https://keessommer.itch.io/" target="_blank"><img src="images/itchio-textless-black.svg"></a>
+                <a class="logo" href="https://keessommer.tumblr.com/" target="_blank"><img src="images/Tumblr_Logos_2018.03.06.svg" style="height: 20px"></a>
+            </div>
+        </div>
+    </body>
+    <script>
+        function clickMainBlock() {
+            document.querySelectorAll('.sub1')
+            .forEach(e => {
+                e.classList.toggle(e.id);
+                const label = e.querySelector('h2');
+                if (label){
+                    label.classList.toggle('visibleHeading');
+                }
+            });
+            document.querySelectorAll('.sub2')
+            .forEach(e => e.classList.remove(e.id));
+
+        }
+
+        function clickSub1Block() {
+            document.getElementById('sub1Down').querySelectorAll('.sub2')
+            .forEach(e => e.classList.toggle(e.id))
+        }
+
+        function clickPopOutBlock(event) {
+            const visualContainer = event.target.closest('.visual');
+            toggleExpansion(visualContainer);
+        }
+
+        function toggleExpansion(target){
+            target.classList.toggle('expanded');
+            target.classList.remove('hoverable');
+            target.querySelector(".overlay").classList.toggle('semiOpaque');
+            target.querySelector("h3").classList.toggle('semiOpaque');
+            target.querySelector("p").classList.toggle('fullyOpaque');
+            const videoPlayer = target.querySelector("iframe");
+            const videoPlayerSource = videoPlayer.src;
+            videoPlayer.src = videoPlayerSource;
+            videoPlayer.classList.toggle('visibleFrame');
+            if (Array.from(target.classList).includes('expanded')){
+                target.parentNode.parentNode.style.zIndex = 2;
+            } else {
+                target.parentNode.parentNode.style.zIndex = 0;
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.expanded')){
+                document.querySelectorAll('.expanded')
+                .forEach(element => toggleExpansion(element));
+            }
+        });
+
+        Array.from(document.querySelectorAll('.visual')).forEach(
+            e => {
+                e.classList.add('hoverable');
+                e.addEventListener('transitionend', () => e.classList.add('hoverable'));
+            }
+        )
+    </script>
+</html>
