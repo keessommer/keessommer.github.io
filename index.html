@@ -7,24 +7,22 @@
         <title>Kees Sommer</title>
         <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');            :root {
-                --baseBlockSize: 100px;
+                --baseBlockSize: 0px;
                 --baseBorderWidth: calc(var(--baseBlockSize) / 10);
                 --baseMargin: calc((var(--baseBlockSize) + var(--baseBorderWidth) * 2) / -2);
                 --hoverScale: 1.05;
-                --expandScale: 6;
+                --expandScale: 1;
                 --backgroundColor: #7D888E;
                 --circleBorderColor: #a6afb4;
                 --circleBackgroundColor: var(--circleBorderColor);
                 --textColor: #E8EAE1;
                 --overlayColor: #3B4549;
                 --overlayOpacity: 0.9;
-                /* --mainLogoBackgroundColor: #666f74; */
                 --mainLogoBackgroundColor: var(--backgroundColor);
                 --mouseDownScale: 0.95;
                 --longTransitionTime: 2s;
                 --mediumTansitionTime: 1s;
                 --fastTransitionTime: 0.3s;
-
             }
 
             html, body {
@@ -346,5 +344,16 @@
                 e.addEventListener('transitionend', () => e.classList.add('hoverable'));
             }
         )
+
+        const baseBlockSize = 100;
+        document.documentElement.style.setProperty('--baseBlockSize', `${baseBlockSize}px`);
+        
+        const updateScaling = () => {
+            const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            const trimmedVw = Math.min(800, vw)
+            document.documentElement.style.setProperty('--expandScale', trimmedVw * 0.66 / baseBlockSize);
+        };
+        updateScaling();
+        window.addEventListener('resize', (event) => updateScaling() );
     </script>
 </html>
