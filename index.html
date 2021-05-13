@@ -157,7 +157,7 @@
 
             .visual.expanded {
                 z-index: 2;
-                transform: scale(var(--expandScale)) translateY(4vh);
+                transform: scale(var(--expandScale)) translate(-0.5vh, 4vh);
             }
 
             .block {
@@ -350,8 +350,8 @@
         
         const updateScaling = () => {
             const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-            const trimmedVw = Math.min(800, vw)
-            document.documentElement.style.setProperty('--expandScale', trimmedVw * 0.66 / baseBlockSize);
+            const trimmedVw = Math.max(600, Math.min(800, vw));
+            document.documentElement.style.setProperty('--expandScale', trimmedVw * 0.7 / baseBlockSize);
         };
         updateScaling();
         window.addEventListener('resize', (event) => updateScaling() );
