@@ -350,7 +350,7 @@
         
         const updateScaling = () => {
             const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-            const trimmedVw = Math.max(600, Math.min(800, vw));
+            const trimmedVw = Math.max(500, Math.min(800, vw));
             document.documentElement.style.setProperty('--expandScale', trimmedVw * 0.7 / baseBlockSize);
         };
         updateScaling();
