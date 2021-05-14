@@ -427,7 +427,10 @@
                 }
             });
             document.querySelectorAll('.sub2')
-            .forEach(e => e.classList.remove(e.id));
+            .forEach(e => {
+                e.classList.remove(e.id);
+                e.classList.remove('popOut');
+            });
         };
 
         const clickSub1Block = (event) => {
