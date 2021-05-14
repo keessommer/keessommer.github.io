@@ -148,7 +148,7 @@
             }
 
             .container {
-                height: 100%;
+                height: 90%;
                 position: relative;
                 z-index: 0;
             }
@@ -158,13 +158,13 @@
                 margin: var(--baseMargin) 0 0 var(--baseMargin);
                 width: var(--baseBlockSize);
                 height: var(--baseBlockSize);
-                background:var(--circleBackgroundColor);
+                /* background:var(--circleBackgroundColor); */
                 border-radius: 50%;
                 border-width: var(--baseBorderWidth);
                 border-color: var(--circleBorderColor);
                 border-style: solid;
                 overflow: hidden;
-                background-size: calc(var(--baseBlockSize) * 0.75);
+                /* background-size: calc(var(--baseBlockSize) * 0.75); */
                 background-position: center;
                 background-repeat: no-repeat;
                 display: flex;
@@ -184,9 +184,35 @@
 
             .visual.expanded {
                 z-index: 2;
-                transform: scale(var(--expandScale)) translate(-0.5vh, 4vh);
                 transition: transform 
                 var(--mediumTansitionTime) var(--popInBezier);
+            }
+
+            .visual.expanded.sub1UpMainVisual {
+                transform: translate(calc(var(--sub1UpGoalX) * -1), 
+                calc(var(--sub1UpGoalY) * -1))
+                scale(var(--expandScale));
+            }
+
+            .visual.expanded.sub2DownDownVisual {
+                transform: translate(calc( (var(--sub2DownDownGoalX) + var(--sub1LeftGoalX))* -1), 
+                /* calc( (var(--sub2DownDownGoalY) + var(--sub1LeftGoalY)) * -1)) */
+                0vh)
+                scale(var(--expandScale));
+            }
+
+            .visual.expanded.sub2DownLeftVisual {
+                transform: translate(calc( (var(--sub2DownLeftGoalX) + var(--sub1LeftGoalX))* -1), 
+                /* calc( (var(--sub2DownLeftGoalY) + var(--sub1LeftGoalY)) * -1)) */
+                0vh)
+                scale(var(--expandScale));
+            }
+
+            .visual.expanded.sub2DownRightVisual {
+                transform: translate(calc( (var(--sub2DownRightGoalX) + var(--sub1LeftGoalX))* -1), 
+                /* calc( (var(--sub2DownRightGoalY) + var(--sub1LeftGoalY)) * -1)) */
+                0vh)
+                scale(var(--expandScale));
             }
 
             .block {
@@ -210,7 +236,7 @@
             .block.sub2 {
                 transition: transform 
                 var(--mediumTansitionTime)
-                var(--popInBezier);
+                var(--popOutBezier);
             }
 
             .block.main {
@@ -259,57 +285,11 @@
     </head>
     <body>
         <div class="container">
-
             <div class="block sub1 mainLevel" id="sub1Left">
                 <div class="block sub2" 
                 id="sub2DownDown">
-                    <div class="block visual" 
-                    onclick="clickPopOutBlock(event)"
-                    style="background-image: url('images/cootSim.png');
-                    background-size: 200%;">
-                        <h3>coot simulator</h3>
-                        <div class="overlay"></div>
-                        <p>
-                            <i>coot simulator</i> is a minimalist simulation of 
-                            the life of a eurasian coot. Available 
-                            <a href="https://keessommer.itch.io/coot-simulator" 
-                            target="_blank">here</a>.
-                        </p>
-                        <iframe width="50" height="30" 
-                        src="https://www.youtube.com/embed/-cQPzXvLpys" 
-                        title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; 
-                        encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>                
-                    </div>
-                    <h2 class="subBlockHeading sub2Heading">coot simulator</h2>
-                </div>                
-
-                <div class="block sub2" id="sub2DownLeft">
-                    <div class="block visual" 
-                    onclick="clickPopOutBlock(event)"
-                    style="background-image: url('images/pixlands.png');
-                    background-size: 100%;">
-                        <h3>pixlands!</h3>
-                        <div class="overlay"></div>
-                        <p>
-                            <i>pixlands!</i> is a lo-fi terrain simulation,
-                            created entirely using an html table.
-                            Available <a href="https://keessommer.github.io/pixlands/" target="_blank">here</a>.
-                        </p>
-                        <iframe width="50" height="30" 
-                        src="https://www.youtube.com/embed/_AJjrSWZurw" 
-                        title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; 
-                        encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
-
-                        </div>
-                    <h2 class="subBlockHeading sub2Heading">pixlands!</h2>
-                </div>
-
-                <div class="block sub2" id="sub2DownRight">
-                    <div class="block visual" 
+                    <div class="block visual"
+                    id="sub2DownDownVisual" 
                     onclick="clickPopOutBlock(event)"
                     style="background-image: url('images/more.png');
                     background-size: 200%;">
@@ -323,12 +303,58 @@
                         <!-- <img src="images/more.png" style="height: 10px"> -->
                         </div>
                     <h2 class="subBlockHeading sub2Heading">\MORE</h2>
+                </div>                
+
+                <div class="block sub2" id="sub2DownLeft">
+                    <div class="block visual"
+                    id="sub2DownLeftVisual"
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/pixlands.png');
+                    background-size: 100%;">
+                        <h3>pixlands!</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>pixlands!</i> is a lo-fi terrain simulation,
+                            created entirely using an html table.
+                            Available <a href="https://keessommer.github.io/pixlands/" target="_blank">here</a>.
+                        </p>
+                        <iframe width="50" height="30" 
+                        src="https://www.youtube.com/embed/_AJjrSWZurw"
+                        title="YouTube video player" 
+                        allow="accelerometer; gyroscope" 
+                        frameborder="0"  
+                        allowfullscreen></iframe>   
+                        </div>
+                    <h2 class="subBlockHeading sub2Heading">pixlands!</h2>
+                </div>
+
+                <div class="block sub2" id="sub2DownRight">
+                    <div class="block visual"
+                    id="sub2DownRightVisual"
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/cootSim.png');
+                    background-size: 200%;">
+                        <h3>coot simulator</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>coot simulator</i> is a minimalist simulation of 
+                            the life of a eurasian coot. Available 
+                            <a href="https://keessommer.itch.io/coot-simulator" 
+                            target="_blank">here</a>.
+                        </p>
+                        <iframe width="50" height="30" 
+                        src="https://www.youtube.com/embed/-cQPzXvLpys"
+                        title="YouTube video player" 
+                        allow="accelerometer; gyroscope" 
+                        frameborder="0"  
+                        allowfullscreen></iframe>                    
+                    </div>
+                    <h2 class="subBlockHeading sub2Heading">coot simulator</h2>
                 </div>
 
                 <div class="block sub1" id="sub1LeftMain">
                     <div class="block visual" 
-                    onclick="clickSub1Block(event)"
-                    style="background-image: url('images/cootSim.png'); background-size: 200%;">
+                    onclick="clickSub1Block(event)">
                     </div>
                 </div>
                 <h2 class="subBlockHeading sub1Heading">available</h2>
@@ -336,7 +362,8 @@
 
             <div class="block sub1 mainLevel" id="sub1Up">
                 <div class="block sub1" id="sub1UpMain">
-                    <div class="block visual" 
+                    <div class="block visual"
+                    id="sub1UpMainVisual"
                     onclick="clickPopOutBlock(event)"
                     style="background-image: url('images/byConstellation.jpg');
                     background-size: 200%;">
@@ -349,7 +376,7 @@
                         <iframe width="50" height="30" 
                         src="https://www.youtube.com/embed/1FOU2Ajxvok" 
                         title="YouTube video player" 
-                        allow="accelerometer; autoplay; gyroscope" 
+                        allow="accelerometer; gyroscope" 
                         frameborder="0"  
                         allowfullscreen></iframe>                   
                     </div>
@@ -360,7 +387,7 @@
             <div class="block sub1" id="sub1Right">
                 <div class="block sub1" id="sub1RightMain">
                     <div class="block visual" 
-                    id="sub1RightVisual" 
+                    id="sub1RightVisual"
                     onclick="clickSub1Block(event)"></div>
                 </div>
                 <h2 class="subBlockHeading sub1Heading">archived</h2>
@@ -418,6 +445,7 @@
 
         const toggleExpansion = (target) => {
             target.classList.toggle('expanded');
+            target.classList.toggle(target.id);
             target.classList.remove('hoverable');
             target.querySelector(".overlay").classList.toggle('semiOpaque');
             target.querySelector("h3").classList.toggle('semiOpaque');
