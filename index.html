@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kees Sommer</title>
+        <link rel="shortcut icon" type="image/jpg" href="images/logo.svg">
         <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');            :root {
                 --baseBlockSize: 0px;
@@ -40,6 +41,14 @@
                 --sub2DownLeftGoalY: calc((-56vh - 15vw) + 550px);
                 --sub2DownRightGoalX: calc(5vw + 120px);
                 --sub2DownRightGoalY: calc((20vh - 0vw) - 75px);
+
+                --sub2RightDownGoalX: calc(-10vw + 30px);
+                --sub2RightDownGoalY: calc((-5vh - 10vw) + 400px);
+                --sub2RightLeftGoalX: -10vw;
+                --sub2RightLeftGoalY: calc((-56vh - 15vw) + 550px);
+                --sub2RightRightGoalX: calc(5vw + 120px);
+                --sub2RightRightGoalY: calc((20vh - 0vw) - 75px);
+             
             }
 
             html, body {
@@ -212,21 +221,36 @@
 
             .visual.expanded.sub2DownDownVisual {
                 transform: translate(calc( (var(--sub2DownDownGoalX) + var(--sub1LeftGoalX))* -1), 
-                /* calc( (var(--sub2DownDownGoalY) + var(--sub1LeftGoalY)) * -1)) */
                 0vh)
                 scale(var(--expandScale));
             }
 
             .visual.expanded.sub2DownLeftVisual {
                 transform: translate(calc( (var(--sub2DownLeftGoalX) + var(--sub1LeftGoalX))* -1), 
-                /* calc( (var(--sub2DownLeftGoalY) + var(--sub1LeftGoalY)) * -1)) */
                 0vh)
                 scale(var(--expandScale));
             }
 
             .visual.expanded.sub2DownRightVisual {
                 transform: translate(calc( (var(--sub2DownRightGoalX) + var(--sub1LeftGoalX))* -1), 
-                /* calc( (var(--sub2DownRightGoalY) + var(--sub1LeftGoalY)) * -1)) */
+                0vh)
+                scale(var(--expandScale));
+            }
+
+            .visual.expanded.sub2RightDownVisual {
+                transform: translate(calc( (var(--sub2RightDownGoalX) + var(--sub1RightGoalX))* -1), 
+                0vh)
+                scale(var(--expandScale));
+            }
+
+            .visual.expanded.sub2RightLeftVisual {
+                transform: translate(calc( (var(--sub2RightLeftGoalX) + var(--sub1RightGoalX))* -1), 
+                0vh)
+                scale(var(--expandScale));
+            }
+
+            .visual.expanded.sub2RightRightVisual {
+                transform: translate(calc( (var(--sub2RightRightGoalX) + var(--sub1RightGoalX))* -1), 
                 0vh)
                 scale(var(--expandScale));
             }
@@ -298,6 +322,19 @@
 
             .block.sub2DownRight {
                 transform: translate(var(--sub2DownRightGoalX), var(--sub2DownRightGoalY));
+            }
+
+            .block.sub2RightDown {
+                transform: translate(var(--sub2RightDownGoalX), var(--sub2RightDownGoalY));
+
+            }
+
+            .block.sub2RightLeft {
+                transform: translate(var(--sub2RightLeftGoalX), var(--sub2RightLeftGoalY));
+            }
+
+            .block.sub2RightRight {
+                transform: translate(var(--sub2RightRightGoalX), var(--sub2RightRightGoalY));
             }
 
             .logo {
@@ -411,69 +448,68 @@
             <div class="block sub1 mainLevel" id="sub1Right">
 
                 <div class="block sub2" 
-                id="sub2DownDown">
-                    <div class="block visual available"
-                    id="sub2DownDownVisual" 
+                id="sub2RightDown">
+                    <div class="block visual archived"
+                    id="sub2RightDownVisual" 
                     onclick="clickPopOutBlock(event)"
-                    style="background-image: url('images/more.png');
-                    background-size: 200%;">
-                        <h3 style="color: var(--textColor);">\MORE</h3>
+                    style="background-image: url('images/korsakovBox.jpeg');
+                    background-size: 125%;">
+                        <h3>korsakov box</h3>
                         <div class="overlay"></div>
                         <p>
-                            <i>\MORE</i> is an experimental text adventure game
-                            played entirely using the <i>more</i> terminal command.
-                            Available <a href="https://keessommer.itch.io/more" target="_blank">here</a>.
-                        </p>
-                        <img src="images/moreTerminalCropped.png" style="height: calc(var(--baseBlockSize) * 0.33)" class="blockImage">
-                    </div>
-                    <h2 class="subBlockHeading sub2Heading">\MORE</h2>
-                </div>                
-
-                <div class="block sub2" id="sub2DownLeft">
-                    <div class="block visual available"
-                    id="sub2DownLeftVisual"
-                    onclick="clickPopOutBlock(event)"
-                    style="background-image: url('images/pixlands.png');
-                    background-size: 100%;">
-                        <h3>pixlands!</h3>
-                        <div class="overlay"></div>
-                        <p>
-                            <i>pixlands!</i> is a lo-fi terrain simulation
-                            made using only html tables.
-                            Available <a href="https://keessommer.github.io/pixlands/" target="_blank">here</a>.
+                            <i>Korsakov box</i> was a music box punch card computer. It worked... as well as expected.
                         </p>
                         <iframe width="356" height="200" 
-                        src="https://www.youtube.com/embed/_AJjrSWZurw"
-                        title="YouTube video player" 
-                        allow="accelerometer; gyroscope" 
-                        frameborder="0"  
-                        allowfullscreen></iframe>   
-                        </div>
-                    <h2 class="subBlockHeading sub2Heading">pixlands!</h2>
-                </div>
-
-                <div class="block sub2" id="sub2DownRight">
-                    <div class="block visual available"
-                    id="sub2DownRightVisual"
-                    onclick="clickPopOutBlock(event)"
-                    style="background-image: url('images/cootSim.png');
-                    background-size: 200%;">
-                        <h3>coot simulator</h3>
-                        <div class="overlay"></div>
-                        <p>
-                            <i>coot simulator</i> is a minimalist simulation of 
-                            the life of a eurasian coot. Available 
-                            <a href="https://keessommer.itch.io/coot-simulator" 
-                            target="_blank">here</a>.
-                        </p>
-                        <iframe width="256" height="200" 
-                        src="https://www.youtube.com/embed/-cQPzXvLpys"
+                        src="https://www.youtube.com/embed/QnrGnSE62sw"
                         title="YouTube video player" 
                         allow="accelerometer; gyroscope" 
                         frameborder="0"  
                         allowfullscreen></iframe>                    
                     </div>
-                    <h2 class="subBlockHeading sub2Heading">coot simulator</h2>
+                    <h2 class="subBlockHeading sub2Heading">korsakov box</h2>
+                </div>                
+
+                <div class="block sub2" id="sub2RightLeft">
+                    <div class="block visual archived"
+                    id="sub2RightLeftVisual"
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/anima.png');
+                    background-size: 150%;">
+                        <h3>anima</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>anima</i> was a first person puzzle platformer featuring physics based puzzles.
+                        </p>
+                        <iframe width="356" height="200" 
+                        src="https://www.youtube.com/embed/-7BBbCkqdh4"
+                        title="YouTube video player" 
+                        allow="accelerometer; gyroscope" 
+                        frameborder="0"  
+                        allowfullscreen></iframe>   
+                        </div>
+                    <h2 class="subBlockHeading sub2Heading">anima</h2>
+                </div>
+
+                <div class="block sub2" id="sub2RightRight">
+                    <div class="block visual archived"
+                    id="sub2RightRightVisual"
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/ediacaranDreamings.jpg');
+                    background-size: 200%;">
+                        <h3 style="transform: translateY(calc(var(--baseBlockSize) * -0.33));">ediacaran<br>dreamings</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>ediacaran dreamings</i> was a robotic aquatic 
+                            installation inspired by cephalopods and eco-feminism.
+                        </p>
+                        <iframe width="356" height="200" 
+                        src="https://www.youtube.com/embed/73cKNhGurVg"
+                        title="YouTube video player" 
+                        allow="accelerometer; gyroscope" 
+                        frameborder="0"  
+                        allowfullscreen></iframe>                    
+                    </div>
+                    <h2 class="subBlockHeading sub2Heading">ediacaran dreamings</h2>
                 </div>
 
                 <div class="block sub1" id="sub1RightMain">
@@ -510,6 +546,21 @@
             }
         }
 
+        const removeSub2Heading = (target) => {
+            const label = target.querySelector('h2.sub2Heading');
+            if (label){
+                label.classList.remove('visibleHeading');
+            }
+        }
+
+        const popInLevel2 = () => 
+            document.querySelectorAll('.sub2')
+            .forEach(e => {
+                e.classList.remove(e.id);
+                e.classList.remove('popOut');
+                removeSub2Heading(e);
+            });
+
         const  clickMainBlock = () => {
             document.querySelectorAll('.sub1')
             .forEach(e => {
@@ -519,21 +570,17 @@
                 if (label){
                     label.classList.toggle('visibleHeading');
                 }
-                const subLabels = e.querySelectorAll('h2.sub2Heading');
-                if (subLabels){
-                    subLabels.forEach( e => e.classList.remove('visibleHeading'));
-                }
             });
-            document.querySelectorAll('.sub2')
-            .forEach(e => {
-                e.classList.remove(e.id);
-                e.classList.remove('popOut');
-            });
+            popInLevel2();
         };
 
         const clickSub1Block = (event) => {
-            const targetContainer = event.target.parentNode.parentNode.id;
-            document.getElementById(targetContainer).querySelectorAll('.sub2')
+            const targetContainer = event.target.parentNode.parentNode;
+            const testBlock = targetContainer.querySelector('.sub2');
+            if (! Array.from(testBlock.classList).includes('popOut')){
+                popInLevel2();
+            }
+            targetContainer.querySelectorAll('.sub2')
             .forEach(e => {
                 e.classList.toggle(e.id);
                 e.classList.toggle('popOut');
