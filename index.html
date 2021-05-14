@@ -25,6 +25,9 @@
                 --fastTransitionTime: 0.3s;
                 --popOutBezier: cubic-bezier(0.8, -0.44, 0.62, 1.01);
                 --popInBezier:cubic-bezier(0.65, 0.13, 0.2, 1.38);
+
+                --sub1DownGoalX: -20vw;
+                --sub1DownGoalY: calc(40vh - (20vw - 10vh));
             }
 
             html, body {
@@ -213,7 +216,7 @@
             }
 
             .block.sub1Down {
-                transform: translate(-20vw, calc(23vh - 5vw));
+                transform: translate(var(--sub1DownGoalX), var(--sub1DownGoalY));
             }
 
             .block.sub1Left {
@@ -246,12 +249,13 @@
     <body>
         <div class="container">
 
-            <div class="block sub1" id="sub1Down">
+            <div class="block sub1 mainLevel" id="sub1Down">
                 <div class="block sub2" 
                 id="sub2DownDown">
                     <div class="block visual" 
-                    onclick="clickPopOutBlock(event)">
-                        <img src="images/cootSim.png" style="height: 110px">
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/cootSim.png');
+                    background-size: 200%;">
                         <h3>coot simulator</h3>
                         <div class="overlay"></div>
                         <p>
@@ -272,8 +276,9 @@
 
                 <div class="block sub2" id="sub2DownLeft">
                     <div class="block visual" 
-                    onclick="clickPopOutBlock(event)">
-                        <img src="images/pixlands.png" style="height: 110px">
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/pixlands.png');
+                    background-size: 100%;">
                         <h3>pixlands!</h3>
                         <div class="overlay"></div>
                         <p>
@@ -292,7 +297,22 @@
                     <h2 class="subBlockHeading sub2Heading">pixlands!</h2>
                 </div>
 
-                <div class="block sub2 visual" id="sub2DownRight"></div>
+                <div class="block sub2" id="sub2DownRight">
+                    <div class="block visual" 
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/more.png');
+                    background-size: 200%;">
+                        <h3 style="color: var(--textColor);">\MORE</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>\MORE</i> is an experimental text adventure game,
+                            played entirely using the terminal and console command <i>more</i>.
+                            Available <a href="https://keessommer.itch.io/more" target="_blank">here</a>.
+                        </p>
+                        <!-- <img src="images/more.png" style="height: 10px"> -->
+                        </div>
+                    <h2 class="subBlockHeading sub2Heading">\MORE</h2>
+                </div>
 
                 <div class="block sub1" id="sub1DownMain">
                     <div class="block visual" 
@@ -304,12 +324,13 @@
                 <h2 class="subBlockHeading sub1Heading">available</h2>
             </div>
 
-            <div class="block sub1" id="sub1Left">
+            <div class="block sub1 mainLevel" id="sub1Left">
                 <div class="block sub1" id="sub1LeftMain">
                     <div class="block visual" 
                     id="sub1LeftVisual"
-                    onclick="clickPopOutBlock(event)">
-                        <img src="images/byConstellation.jpg" style="height: 110px">
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/byConstellation.jpg');
+                    background-size: 200%;">
                         <h3>by constellation</h3>
                         <div class="overlay"></div>
                         <p>
@@ -355,7 +376,7 @@
         </div>
     </body>
     <script>
-        function clickMainBlock() {
+        const  clickMainBlock = () => {
             document.querySelectorAll('.sub1')
             .forEach(e => {
                 e.classList.toggle(e.id);
@@ -371,9 +392,9 @@
             });
             document.querySelectorAll('.sub2')
             .forEach(e => e.classList.remove(e.id));
-        }
+        };
 
-        function clickSub1Block(event) {
+        const clickSub1Block = (event) => {
             const targetContainer = event.target.parentNode.parentNode.id;
             document.getElementById(targetContainer).querySelectorAll('.sub2')
             .forEach(e => {
@@ -384,34 +405,47 @@
                     label.classList.toggle('visibleHeading');
                 }
             });
-        }
+        };
 
-        function clickPopOutBlock(event) {
-            const visualContainer = event.target.closest('.visual');
-            toggleExpansion(visualContainer);
-        }
-
-        function toggleExpansion(target){
+        const toggleExpansion = (target) => {
             target.classList.toggle('expanded');
             target.classList.remove('hoverable');
             target.querySelector(".overlay").classList.toggle('semiOpaque');
             target.querySelector("h3").classList.toggle('semiOpaque');
             target.querySelector("p").classList.toggle('fullyOpaque');
             const videoPlayer = target.querySelector("iframe");
-            const videoPlayerSource = videoPlayer.src;
-            videoPlayer.src = videoPlayerSource;
-            videoPlayer.classList.toggle('visibleFrame');
+            if (videoPlayer){
+                const videoPlayerSource = videoPlayer.src;
+                videoPlayer.src = videoPlayerSource;
+                videoPlayer.classList.toggle('visibleFrame');
+            }
             if (Array.from(target.classList).includes('expanded')){
-                target.parentNode.parentNode.style.zIndex = 2;
+                target.parentNode.style.zIndex = 2;
+                target.closest('.mainLevel').style.zIndex = 2;
             } else {
-                target.parentNode.parentNode.style.zIndex = 0;
+                target.parentNode.style.zIndex = 0;
+                target.closest('.mainLevel').style.zIndex = 0;
+            }
+        };
+
+        const unexpandAll = () => {
+            const expandedElement = document.querySelector('.expanded');
+            if (expandedElement){
+                toggleExpansion(expandedElement);
             }
         }
 
+        const clickPopOutBlock = (event) => {
+            const visualContainer = event.target.closest('.visual');
+            if (!Array.from(visualContainer.classList).includes('expanded')){
+                unexpandAll();
+            }
+            toggleExpansion(visualContainer)
+        };
+
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.expanded')){
-                document.querySelectorAll('.expanded')
-                .forEach(element => toggleExpansion(element));
+                unexpandAll();
             }
         });
 
@@ -419,8 +453,7 @@
             e => {
                 e.classList.add('hoverable');
                 e.addEventListener('transitionend', () => e.classList.add('hoverable'));
-            }
-        )
+            });
 
         const baseBlockSize = 100;
         document.documentElement.style.setProperty('--baseBlockSize', `${baseBlockSize}px`);
