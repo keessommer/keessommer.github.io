@@ -16,18 +16,22 @@
                 --circleBorderColor: #a6afb4;
                 --circleBackgroundColor: var(--circleBorderColor);
                 --textColor: #E8EAE1;
-                --overlayColor: #3B4549;
+                --overlayColor: #191f22;
                 --overlayOpacity: 0.9;
                 --mainLogoBackgroundColor: var(--backgroundColor);
                 --mouseDownScale: 0.95;
                 --longTransitionTime: 2s;
                 --mediumTansitionTime: 1s;
                 --fastTransitionTime: 0.3s;
+                --popOutBezier: cubic-bezier(0.8, -0.44, 0.62, 1.01);
+                --popInBezier:cubic-bezier(0.65, 0.13, 0.2, 1.38);
             }
 
             html, body {
                 height: 100%;
                 font-family: 'Montserrat', sans-serif;
+                max-width: 100%;
+                overflow-x: hidden;
             }
             
             body {
@@ -56,7 +60,7 @@
                 transition: var(--mediumTansitionTime);
                 opacity: 0;
                 left: 50%;
-                transform: translate(-50%, calc(var(--baseBlockSize) * 0.9));
+                transform: translate(-50%, calc(var(--baseBlockSize) * 0.6));
                 z-index: -1;
             }
 
@@ -76,16 +80,24 @@
 
             p {
                 position: absolute;
-                font-size: 2pt;
+                font-size: 3pt;
                 color: var(--textColor);
                 max-width: calc(var(--baseBlockSize) * 0.9);
                 text-align: center;
                 opacity: 0;
             }
 
+            a:link {
+                color: #9dc9e5;
+            }
+
+            a:visited {
+                color: #9dc9e5;
+            }
+
             iframe {
                 position: absolute; 
-                transform: translateY(calc(var(--baseBlockSize) * 0.33));
+                transform: translateY(calc(var(--baseBlockSize) * 0.25));
                 visibility: hidden;
                 opacity: 0;
                 transition: var(--longTransitionTime);
@@ -160,10 +172,11 @@
             .visual.expanded {
                 z-index: 2;
                 transform: scale(var(--expandScale)) translate(-0.5vh, 4vh);
+                transition: transform 
+                var(--mediumTansitionTime) var(--popInBezier);
             }
 
             .block {
-                transition: transform var(--mediumTansitionTime) ease-in-out;
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -175,10 +188,28 @@
                 z-index: 0;
             }
 
+            .block.sub1 {
+                transition: transform 
+                var(--mediumTansitionTime) 
+                var(--popOutBezier);
+            }
+
+            .block.sub2 {
+                transition: transform 
+                var(--mediumTansitionTime)
+                var(--popInBezier);
+            }
+
             .block.main {
                 z-index: 1;
                 background-color: var(--mainLogoBackgroundColor);
                 border-color: var(--circleBorderColor);
+            }
+
+            .block.popOut {
+                transition: transform 
+                var(--mediumTansitionTime) 
+                var(--popInBezier);
             }
 
             .block.sub1Down {
@@ -191,16 +222,6 @@
 
             .block.sub1Right {
                 transform: translate(20vw, calc(37vh - 5vw));
-            }
-
-            .block.sub1DownMain {
-                transform: scale(1.35);
-                transition: var(--mediumTansitionTime);
-            }
-
-            .block.sub1LeftMain {
-                transform: scale(1.18);
-                transition: var(--mediumTansitionTime);
             }
 
             .block.sub2DownDown {
@@ -226,16 +247,61 @@
         <div class="container">
 
             <div class="block sub1" id="sub1Down">
-                <div class="block visual sub2" id="sub2DownDown"></div>
-                <div class="block sub2 visual" id="sub2DownLeft"></div>
+                <div class="block sub2" 
+                id="sub2DownDown">
+                    <div class="block visual" 
+                    onclick="clickPopOutBlock(event)">
+                        <img src="images/cootSim.png" style="height: 110px">
+                        <h3>coot simulator</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>coot simulator</i> is a minimalist simulation of 
+                            the life of a eurasian coot. Available 
+                            <a href="https://keessommer.itch.io/coot-simulator" 
+                            target="_blank">here</a>.
+                        </p>
+                        <iframe width="50" height="30" 
+                        src="https://www.youtube.com/embed/-cQPzXvLpys" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; 
+                        encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>                
+                    </div>
+                    <h2 class="subBlockHeading sub2Heading">coot simulator</h2>
+                </div>                
+
+                <div class="block sub2" id="sub2DownLeft">
+                    <div class="block visual" 
+                    onclick="clickPopOutBlock(event)">
+                        <img src="images/pixlands.png" style="height: 110px">
+                        <h3>pixlands!</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>pixlands!</i> is a lo-fi terrain simulation,
+                            created entirely using an html table.
+                            Available <a href="https://keessommer.github.io/pixlands/" target="_blank">here</a>.
+                        </p>
+                        <iframe width="50" height="30" 
+                        src="https://www.youtube.com/embed/_AJjrSWZurw" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; 
+                        encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+
+                        </div>
+                    <h2 class="subBlockHeading sub2Heading">pixlands!</h2>
+                </div>
+
                 <div class="block sub2 visual" id="sub2DownRight"></div>
 
                 <div class="block sub1" id="sub1DownMain">
                     <div class="block visual" 
                     id="sub1DownVisual" 
-                    onclick="clickSub1Block()"></div>
+                    onclick="clickSub1Block(event)"
+                    style="background-image: url('images/cootSim.png'); background-size: 200%;">
+                    </div>
                 </div>
-                <h2 class="subBlockHeading">available</h2>
+                <h2 class="subBlockHeading sub1Heading">available</h2>
             </div>
 
             <div class="block sub1" id="sub1Left">
@@ -247,20 +313,8 @@
                         <h3>by constellation</h3>
                         <div class="overlay"></div>
                         <p>
-                        Lorem ipsum dolor sit amet, 
-                            consectetur adipiscing elit, 
-                            sed do eiusmod tempor incididunt 
-                            ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud 
-                            exercitation ullamco laboris nisi ut 
-                            aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit 
-                            in voluptate velit esse cillum 
-                            dolore eu fugiat nulla pariatur. 
-                            Excepteur sint occaecat cupidatat 
-                            non proident, sunt in culpa qui 
-                            officia deserunt mollit anim id 
-                            est laborum.
+                            <i>by constellation</i> is an upcoming first 
+                            person puzzle game where players connect orbs to travel through a serene world.
                         </p>
                         <iframe width="50" height="30" 
                         src="https://www.youtube.com/embed/1FOU2Ajxvok" 
@@ -270,10 +324,17 @@
                         allowfullscreen></iframe>                   
                     </div>
                 </div>
-                <h2 class="subBlockHeading">upcoming</h2>
+                <h2 class="subBlockHeading sub1Heading">upcoming</h2>
             </div>
 
-            <div class="block sub1 visual" id="sub1Right"></div>
+            <div class="block sub1" id="sub1Right">
+                <div class="block sub1" id="sub1RightMain">
+                    <div class="block visual" 
+                    id="sub1RightVisual" 
+                    onclick="clickSub1Block(event)"></div>
+                </div>
+                <h2 class="subBlockHeading sub1Heading">archived</h2>
+            </div>
 
             <div class="block visual main" 
             id="mainBlock"
@@ -281,7 +342,9 @@
                 <img src="images/logo.svg" style="width: calc(var(--baseBlockSize) * 0.9)">
             </div>
             <div class="mainInfo" onclick="clickMainBlock()">
-                <br><br>
+                <br><br><br><br>
+                <h2>click or tap</h2>
+                <br>
                 <h1>Kees Sommer</h1>
                 <h2>full stack & game dev</h2>
                 <br>
@@ -296,19 +359,31 @@
             document.querySelectorAll('.sub1')
             .forEach(e => {
                 e.classList.toggle(e.id);
-                const label = e.querySelector('h2');
+                e.classList.toggle('popOut');
+                const label = e.querySelector('h2.sub1Heading');
                 if (label){
                     label.classList.toggle('visibleHeading');
+                }
+                const subLabels = e.querySelectorAll('h2.sub2Heading');
+                if (subLabels){
+                    subLabels.forEach( e => e.classList.remove('visibleHeading'));
                 }
             });
             document.querySelectorAll('.sub2')
             .forEach(e => e.classList.remove(e.id));
-
         }
 
-        function clickSub1Block() {
-            document.getElementById('sub1Down').querySelectorAll('.sub2')
-            .forEach(e => e.classList.toggle(e.id))
+        function clickSub1Block(event) {
+            const targetContainer = event.target.parentNode.parentNode.id;
+            document.getElementById(targetContainer).querySelectorAll('.sub2')
+            .forEach(e => {
+                e.classList.toggle(e.id);
+                e.classList.toggle('popOut');
+                const label = e.querySelector('h2.sub2Heading');
+                if (label){
+                    label.classList.toggle('visibleHeading');
+                }
+            });
         }
 
         function clickPopOutBlock(event) {
