@@ -412,6 +412,13 @@
         </div>
     </body>
     <script>
+        const toggleSub2Heading = (target) => {
+            const label = target.querySelector('h2.sub2Heading');
+                if (label){
+                    label.classList.toggle('visibleHeading');
+                }
+        }
+
         const  clickMainBlock = () => {
             document.querySelectorAll('.sub1')
             .forEach(e => {
@@ -439,10 +446,7 @@
             .forEach(e => {
                 e.classList.toggle(e.id);
                 e.classList.toggle('popOut');
-                const label = e.querySelector('h2.sub2Heading');
-                if (label){
-                    label.classList.toggle('visibleHeading');
-                }
+                toggleSub2Heading(e);
             });
         };
 
@@ -453,6 +457,7 @@
             target.querySelector(".overlay").classList.toggle('semiOpaque');
             target.querySelector("h3").classList.toggle('semiOpaque');
             target.querySelector("p").classList.toggle('fullyOpaque');
+            toggleSub2Heading(target.parentNode);
             const videoPlayer = target.querySelector("iframe");
             if (videoPlayer){
                 const videoPlayerSource = videoPlayer.src;
