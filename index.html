@@ -26,8 +26,18 @@
                 --popOutBezier: cubic-bezier(0.8, -0.44, 0.62, 1.01);
                 --popInBezier:cubic-bezier(0.65, 0.13, 0.2, 1.38);
 
-                --sub1DownGoalX: -20vw;
-                --sub1DownGoalY: calc(40vh - (20vw - 10vh));
+                --sub1UpGoalX: 3vw;
+                --sub1UpGoalY: calc(-28vh - 40px);
+                --sub1LeftGoalX: -20vw;
+                --sub1LeftGoalY: calc((15vh - 20vw) + 300px);
+                --sub1RightGoalX: 30vw;
+                --sub1RightGoalY: calc((10vh - 30vw) + 600px);
+                --sub2DownDownGoalX: calc(-10vw + 30px);
+                --sub2DownDownGoalY: calc((-5vh - 10vw) + 400px);
+                --sub2DownLeftGoalX: -10vw;
+                --sub2DownLeftGoalY: calc((-56vh - 15vw) + 550px);
+                --sub2DownRightGoalX: calc(5vw + 120px);
+                --sub2DownRightGoalY: calc((20vh - 0vw) - 75px);
             }
 
             html, body {
@@ -215,28 +225,29 @@
                 var(--popInBezier);
             }
 
-            .block.sub1Down {
-                transform: translate(var(--sub1DownGoalX), var(--sub1DownGoalY));
+            .block.sub1Left {
+                transform: translate(var(--sub1LeftGoalX), var(--sub1LeftGoalY));
             }
 
-            .block.sub1Left {
-                transform: translate(3vw, max(-28vh, -50vh + var(--baseBlockSize)));
+            .block.sub1Up {
+                transform: translate(var(--sub1UpGoalX), var(--sub1UpGoalY));
             }
 
             .block.sub1Right {
-                transform: translate(20vw, calc(37vh - 5vw));
+                transform: translate(var(--sub1RightGoalX), var(--sub1RightGoalY));
             }
 
             .block.sub2DownDown {
-                transform: translateX(-22vw) translateY(calc(20vh - 10vw));
+                transform: translate(var(--sub2DownDownGoalX), var(--sub2DownDownGoalY));
+
             }
 
             .block.sub2DownLeft {
-                transform: translateX(-10vw) translateY(calc(-12vh - 10vw));
+                transform: translate(var(--sub2DownLeftGoalX), var(--sub2DownLeftGoalY));
             }
 
             .block.sub2DownRight {
-                transform: translateX(10vw) translateY(calc(40vh - 30vw));
+                transform: translate(var(--sub2DownRightGoalX), var(--sub2DownRightGoalY));
             }
 
             .logo {
@@ -249,7 +260,7 @@
     <body>
         <div class="container">
 
-            <div class="block sub1 mainLevel" id="sub1Down">
+            <div class="block sub1 mainLevel" id="sub1Left">
                 <div class="block sub2" 
                 id="sub2DownDown">
                     <div class="block visual" 
@@ -314,9 +325,8 @@
                     <h2 class="subBlockHeading sub2Heading">\MORE</h2>
                 </div>
 
-                <div class="block sub1" id="sub1DownMain">
+                <div class="block sub1" id="sub1LeftMain">
                     <div class="block visual" 
-                    id="sub1DownVisual" 
                     onclick="clickSub1Block(event)"
                     style="background-image: url('images/cootSim.png'); background-size: 200%;">
                     </div>
@@ -324,10 +334,9 @@
                 <h2 class="subBlockHeading sub1Heading">available</h2>
             </div>
 
-            <div class="block sub1 mainLevel" id="sub1Left">
-                <div class="block sub1" id="sub1LeftMain">
+            <div class="block sub1 mainLevel" id="sub1Up">
+                <div class="block sub1" id="sub1UpMain">
                     <div class="block visual" 
-                    id="sub1LeftVisual"
                     onclick="clickPopOutBlock(event)"
                     style="background-image: url('images/byConstellation.jpg');
                     background-size: 200%;">
