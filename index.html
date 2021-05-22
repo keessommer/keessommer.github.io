@@ -36,9 +36,12 @@
                 --sub1LeftGoalY: calc((15vh - 20vw) + 300px);
                 --sub1RightGoalX: 30vw;
                 --sub1RightGoalY: calc((10vh - 30vw) + 600px);
+
                 --sub2DownDownGoalX: calc(-10vw + 30px);
                 --sub2DownDownGoalY: calc((-5vh - 10vw) + 400px);
-                --sub2DownLeftGoalX: -10vw;
+                --sub2DownUpGoalX: calc(-5vw + 120px);
+                --sub2DownUpGoalY: calc((0vh - 15vw) + 500px);
+                --sub2DownLeftGoalX: calc(-10vw + 20px);
                 --sub2DownLeftGoalY: calc((-56vh - 15vw) + 550px);
                 --sub2DownRightGoalX: calc(5vw + 120px);
                 --sub2DownRightGoalY: calc((20vh - 0vw) - 75px);
@@ -235,6 +238,12 @@
                 scale(var(--expandScale));
             }
 
+            .visual.expanded.sub2DownUpVisual {
+                transform: translate(calc( (var(--sub2DownUpGoalX) + var(--sub1LeftGoalX))* -1), 
+                0vh)
+                scale(var(--expandScale));
+            }
+
             .visual.expanded.sub2DownRightVisual {
                 transform: translate(calc( (var(--sub2DownRightGoalX) + var(--sub1LeftGoalX))* -1), 
                 0vh)
@@ -324,6 +333,10 @@
                 transform: translate(var(--sub2DownLeftGoalX), var(--sub2DownLeftGoalY));
             }
 
+            .block.sub2DownUp {
+                transform: translate(var(--sub2DownUpGoalX), var(--sub2DownUpGoalY));
+            }
+
             .block.sub2DownRight {
                 transform: translate(var(--sub2DownRightGoalX), var(--sub2DownRightGoalY));
             }
@@ -351,28 +364,9 @@
     <body>
         <div class="container">
             <div class="block sub1 mainLevel" id="sub1Left">
-                <div class="block sub2" 
-                id="sub2DownDown">
+                <div class="block sub2" id="sub2DownDown">
                     <div class="block visual available"
                     id="sub2DownDownVisual" 
-                    onclick="clickPopOutBlock(event)"
-                    style="background-image: url('images/more.png');
-                    background-size: 200%;">
-                        <h3 style="color: var(--textColor);">\MORE</h3>
-                        <div class="overlay"></div>
-                        <p>
-                            <i>\MORE</i> is an experimental text adventure game
-                            played entirely using the <i>more</i> terminal command.
-                            Available <a href="https://keessommer.itch.io/more" target="_blank">here</a>.
-                        </p>
-                        <img src="images/moreTerminalCropped.png" style="height: calc(var(--baseBlockSize) * 0.33)" class="blockImage">
-                    </div>
-                    <h2 class="subBlockHeading sub2Heading">\MORE</h2>
-                </div>                
-
-                <div class="block sub2" id="sub2DownLeft">
-                    <div class="block visual available"
-                    id="sub2DownLeftVisual"
                     onclick="clickPopOutBlock(event)"
                     style="background-image: url('images/pixlands.png');
                     background-size: 100%;">
@@ -391,7 +385,48 @@
                         allowfullscreen></iframe>   
                         </div>
                     <h2 class="subBlockHeading sub2Heading">pixlands!</h2>
+                </div>                
+
+                <div class="block sub2" id="sub2DownLeft">
+                    <div class="block visual available"
+                    id="sub2DownLeftVisual"
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/accursedTomb.png');
+                    background-size: 100%;">
+                        <h3 style="color: var(--textColor);">the accursed tomb</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>the accursed tomb</i> is a dungeon crawler for 1-4 players, using a standard 52-card deck.
+                            Available <a href="https://keessommer.itch.io/the-accursed-tomb" target="_blank">here</a>.
+                        </p>
+                        <iframe width="356" height="200" 
+                        src="https://www.youtube.com/embed/zFl-cOvWsf4"
+                        title="YouTube video player" 
+                        allow="accelerometer; gyroscope" 
+                        frameborder="0"  
+                        allowfullscreen></iframe>   
+                        </div>
+                    <h2 class="subBlockHeading sub2Heading">accursed tomb</h2>
                 </div>
+
+                <div class="block sub2" id="sub2DownUp">
+                    <div class="block visual available"
+                    id="sub2DownUpVisual"
+                    onclick="clickPopOutBlock(event)"
+                    style="background-image: url('images/more.png');
+                    background-size: 200%;">
+                        <h3 style="color: var(--textColor);">\MORE</h3>
+                        <div class="overlay"></div>
+                        <p>
+                            <i>\MORE</i> is an experimental text adventure game
+                            played entirely using the <i>more</i> terminal command.
+                            Available <a href="https://keessommer.itch.io/more" target="_blank">here</a>.
+                        </p>
+                        <img src="images/moreTerminalCropped.png" style="height: calc(var(--baseBlockSize) * 0.33)" class="blockImage">
+                    </div>
+                    <h2 class="subBlockHeading sub2Heading">\MORE</h2>
+                </div>
+
 
                 <div class="block sub2" id="sub2DownRight">
                     <div class="block visual available"
